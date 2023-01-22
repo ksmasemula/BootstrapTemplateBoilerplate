@@ -250,3 +250,36 @@
   new PureCounter();
 
 })()
+
+$(document).ready((e) => {
+  $('.sub-menu-button').on('click', function (e) {
+    $('#logo-text').css('display', 'block');
+    $('.logo-img').css('display', 'none');
+  });
+  $('.sub-menu-button-home').on('click', function (e) {
+    $('#logo-text').css('display', 'none');
+    $('.logo-img').css('display', 'block');
+  });
+})
+$('.sendMsg').click((e) => {
+  e.preventDefault();
+  let name = $('#name').val();
+  let email = $('#email').val();
+  let subject = $('#subject').val();
+  let message = $('#message').val();
+
+  if (name || email || subject || message) {
+    $('.sent-message').removeClass('d-block');
+    $('.loading').addClass('d-block');
+    data = JSON.stringify({ name: name, email: email, subject: subject, message: message, target: 'ksmasemula@gmail.com' });
+    $.post("https://contactformemailer.azurewebsites.net/api/emailerApi", data)
+      .done(function () {
+        $('.loading').removeClass('d-block');
+        $('.sent-message').addClass('d-block');
+      })
+      .fail(function () {
+        $('.loading').removeClass('d-block');
+        $('.sent-message').addClass('d-block');
+      });
+  }
+});
