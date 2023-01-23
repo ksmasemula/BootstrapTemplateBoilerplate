@@ -1193,3 +1193,11 @@ section .container {
 .credits a:hover {
   color: #fff;
 }
+
+@media (max-width: 480px) {
+  .logo-img {
+    width: 350px;
+    margin-top: 27% !important;
+  }
+
+}
