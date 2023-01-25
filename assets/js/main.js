@@ -260,7 +260,8 @@ $(document).ready((e) => {
     $('#logo-text').css('display', 'none');
     $('.logo-img').css('display', 'block');
   });
-})
+});
+
 $('.sendMsg').click((e) => {
   e.preventDefault();
   let name = $('#name').val();
