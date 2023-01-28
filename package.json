@@ -1,6 +1,24 @@
 {
   "devDependencies": {
+    "css-loader": "^6.7.3",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "name": "profilesite",
+  "description": "Welcome to Kabelo Masemula's Profile site",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve",
+    "build": "NODE_ENV=production && webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "isotope": "^1.0.0-alpha.3",
+    "isotope-layout": "^3.0.6",
+    "jquery": "^3.6.3"
   }
 }
