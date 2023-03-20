@@ -1,20 +1,20 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtroctPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 let production = process.env.NODE_ENV === 'production';
 
 let config = {
     entry: [
-        "./index.js",
-        "./node_modules/jquery/dist/jquery.min.js",
-        "./assets/vendor/purecounter/purecounter_vanilla.js",
-        "./assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
-        "./assets/vendor/glightbox/js/glightbox.min.js",
-        "./assets/vendor/isotope-layout/isotope.pkgd.min.js",
-        "./assets/vendor/swiper/swiper-bundle.min.js",
-        "./assets/vendor/waypoints/noframework.waypoints.js",        
-        "./assets/js/main.js"
+        "./src/index.js",
+        "./src/assets/vendor/purecounter/purecounter_vanilla.js",
+        "./src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
+        "./src/assets/vendor/glightbox/js/glightbox.min.js",
+        "./src/assets/vendor/isotope-layout/isotope.pkgd.min.js",
+        "./src/assets/vendor/swiper/swiper-bundle.min.js",
+        "./src/assets/vendor/waypoints/noframework.waypoints.js",        
+        "./src/assets/js/main.js"
     ],
     output: {
         filename: 'main.js',
@@ -32,27 +32,38 @@ let config = {
                 test: /\.css$/,
                 exclude: /node_modules/,
                 use: [
-                    MiniCssExtroctPlugin.loader,
+                    MiniCssExtractPlugin.loader,
                     "css-loader"
                 ]
             },
             {
-                test:/\.(png|svg|jpg|jpeg|git)$/,
+                test:/\.(png|svg|jpg|jpeg|git)$/i,
                 type: "asset/resource",
                 generator:{
                     filename: "img/[hash][name][ext]"
+                }
+            } ,
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator:{
+                    filename: "fonts/[hash][name][ext]"
                 }
             }
         ]
     },
     mode: 'development',
     plugins: [
-        new HtmlWebpackPlugin({ template: 'index.html' }),
-        new MiniCssExtroctPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: "jquery"
+        }),
+        new HtmlWebpackPlugin({ template: './src/index.html' }),
+        new MiniCssExtractPlugin({ filename: "[name].css" }),
     ],
     devServer: {
-        watchFiles: ["/**/*", "index.html"],
-        static: "./dist"
+        watchFiles: ["src/**/*"],
+        static: "./dist",
     }
 
 };
