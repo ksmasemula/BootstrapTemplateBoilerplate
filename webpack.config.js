@@ -5,20 +5,15 @@ const MiniCssExtroctPlugin = require('mini-css-extract-plugin');
 let production = process.env.NODE_ENV === 'production';
 
 let config = {
-    entry: {
-        bundle:[
-            "./index.js",
-            "./assets/vendor/purecounter/purecounter_vanilla.js",
-            "./assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
-            "./assets/vendor/glightbox/js/glightbox.min.js",
-            "./assets/vendor/isotope-layout/isotope.pkgd.min.js",
-            "./assets/vendor/swiper/swiper-bundle.min.js",
-            "./assets/vendor/waypoints/noframework.waypoints.js",
-            "./assets/js/main.js",
-        ],
-    },
+    entry: [
+        "./src/index.js",
+        "./src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
+        "./src/assets/vendor/isotope-layout/isotope.pkgd.min.js",
+        "./src/assets/vendor/waypoints/noframework.waypoints.js",        
+        "./src/assets/js/main.js"
+    ],
     output: {
-        filename: '[name].js',
+        filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
         clean: true,
     },
@@ -33,30 +28,31 @@ let config = {
                 test: /\.css$/,
                 exclude: /node_modules/,
                 use: [
-                    MiniCssExtroctPlugin.loader,
+                    MiniCssExtractPlugin.loader,
                     "css-loader"
                 ]
             },
             {
-                test:/\.(png|svg|jpg|jpeg|git)$/,
+                test:/\.(png|svg|jpg|jpeg|git)$/i,
                 type: "asset/resource",
                 generator:{
                     filename: "img/[hash][name][ext]"
                 }
-            }
+            } ,
         ]
     },
     mode: 'development',
     plugins: [
-        new HtmlWebpackPlugin({ 
-            inject: 'body',
-            template: 'index.html' 
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: "jquery"
         }),
-        new MiniCssExtroctPlugin(),
+        new HtmlWebpackPlugin({ template: './src/index.html' }),
+        new MiniCssExtractPlugin({ filename: "[name].css" }),
     ],
     devServer: {
-        watchFiles: ["/**/*", "index.html"],
-        static: "./dist"
+        watchFiles: ["src/**/*"],
+        static: "./dist",
     }
 
 };
