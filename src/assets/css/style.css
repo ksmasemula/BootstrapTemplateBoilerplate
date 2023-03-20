@@ -1,6 +1,12 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "../vendor/bootstrap-icons/bootstrap-icons.css";
+@import "../vendor/boxicons/css/boxicons.min.css";
+@import "../vendor/glightbox/css/glightbox.min.css";
+@import "../vendor/remixicon/remixicon.css";
+
 body {
   font-family: "Open Sans", sans-serif;
   background-color: #040404;

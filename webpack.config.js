@@ -8,11 +8,8 @@ let production = process.env.NODE_ENV === 'production';
 let config = {
     entry: [
         "./src/index.js",
-        "./src/assets/vendor/purecounter/purecounter_vanilla.js",
         "./src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
-        "./src/assets/vendor/glightbox/js/glightbox.min.js",
         "./src/assets/vendor/isotope-layout/isotope.pkgd.min.js",
-        "./src/assets/vendor/swiper/swiper-bundle.min.js",
         "./src/assets/vendor/waypoints/noframework.waypoints.js",        
         "./src/assets/js/main.js"
     ],
@@ -43,13 +40,6 @@ let config = {
                     filename: "img/[hash][name][ext]"
                 }
             } ,
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource',
-                generator:{
-                    filename: "fonts/[hash][name][ext]"
-                }
-            }
         ]
     },
     mode: 'development',
